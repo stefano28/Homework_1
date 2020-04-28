@@ -5,6 +5,29 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        Map map = Input(args);
+        map.print();
+        System.out.println("Il numero di pezzi presenti sulla mappa per ciascuna tipologia: ");
+        PiecesForType(map);
+        System.out.print("La casella con il maggior valore di difesa di giorno: ");
+        BestDefence(map, true);
+        System.out.print("La casella con il maggior valore di difesa di notte: ");
+        BestDefence(map, false);
+        System.out.print("La casella con il maggior valore di attacco di giorno: ");
+        BestAttack(map, true);
+        System.out.print("La casella con il maggior valore di attacco di notte: ");
+        BestAttack(map, false);
+        System.out.print("La casella con il maggior numero di pezzi dello stesso tipo: ");
+        BestEqualPieces(map);
+    }
+
+    /*
+        Metodo statico che crea la mappa e inserisce i personaggi dai file di input.
+        Richiede come parametro una Map e restituisce una Map.
+        In caso di eventuali errori gestisce autonomamente le eccezioni InputErrorException, FileNotFoundException, IOException.
+    */
+
+    static Map Input(String args[]) {
         Map map = null;
         try {
             if(args.length < 2) {
@@ -55,19 +78,7 @@ public class Main {
             System.out.println("Errore: formato del file non valido");
             System.exit(1);
         }
-        map.print();
-        System.out.println("Il numero di pezzi presenti sulla mappa per ciascuna tipologia: ");
-        PiecesForType(map);
-        System.out.print("La casella con il maggior valore di difesa di giorno: ");
-        BestDefence(map, true);
-        System.out.print("La casella con il maggior valore di difesa di notte: ");
-        BestDefence(map, false);
-        System.out.print("La casella con il maggior valore di attacco di giorno: ");
-        BestAttack(map, true);
-        System.out.print("La casella con il maggior valore di attacco di notte: ");
-        BestAttack(map, false);
-        System.out.print("La casella con il maggior numero di pezzi dello stesso tipo: ");
-        BestEqualPieces(map);
+        return map;
     }
     
     /*
