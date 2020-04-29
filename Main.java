@@ -77,6 +77,9 @@ public class Main {
         } catch(InputErrorException e) {
             System.out.println("Errore: formato del file non valido");
             System.exit(1);
+        } catch(NumberFormatException e) {
+            System.out.println("Errore: formato del file non valido");
+            System.exit(1);
         }
         return map;
     }

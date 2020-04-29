@@ -1,6 +1,6 @@
 public class Character {
-    protected double attack;
-    protected double defence;
+    private double attack;
+    private double defence;
 
     public Character(double attack, double defence) {
         this.attack = attack;
