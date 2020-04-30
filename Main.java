@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         Map map = Input(args);
-        map.print();
+        System.out.println();
         System.out.println("Il numero di pezzi presenti sulla mappa per ciascuna tipologia: ");
         PiecesForType(map);
         System.out.print("La casella con il maggior valore di difesa di giorno: ");
@@ -27,7 +27,7 @@ public class Main {
         In caso di eventuali errori gestisce autonomamente le eccezioni InputErrorException, FileNotFoundException, IOException.
     */
 
-    static Map Input(String args[]) {
+    static Map Input(String[] args) {
         Map map = null;
         try {
             if(args.length < 2) {
@@ -40,8 +40,13 @@ public class Main {
             String[] firstLine = buffer.readLine().split(" ", 2); // Lettura delle dimensioni della mappa
             map = new Map(Integer.parseInt(firstLine[0]), Integer.parseInt(firstLine[1]));
             buffer.readLine();
+            int lineCounter = 0;
             while((line = buffer.readLine()) != null) { // Lettura tipologia delle caselle
                 map.addCell(line);
+                lineCounter++;
+            }
+            if(lineCounter != map.getHeight() * map.getWidth()) {
+                throw new InputErrorException();
             }
             // Lettura e inserimento dei dati contenuti nel primo secondo file: personaggi
             reader = new FileReader(args[1]);
@@ -75,10 +80,10 @@ public class Main {
             System.out.println("Errore: errore generico di input");
             System.exit(1);
         } catch(InputErrorException e) {
-            System.out.println("Errore: formato del file non valido");
+            System.out.println("Errore: input non valido");
             System.exit(1);
         } catch(NumberFormatException e) {
-            System.out.println("Errore: formato del file non valido");
+            System.out.println("Errore: input non valido");
             System.exit(1);
         }
         return map;
@@ -166,15 +171,12 @@ public class Main {
         int score = 0;
         for(int i = 0; i < m.getHeight(); i++) {
             for(int j = 0; j < m.getWidth(); j++) {
-                if(m.getElfi(j, i) >= elfiBest) {
+                if(m.getElfi(j, i) >= elfiBest)
                     score = m.getElfi(j, i);
-                }
-                if(m.getNani(j, i) >= naniBest) {
+                if(m.getNani(j, i) >= naniBest)
                     score = m.getNani(j, i);
-                }
-                if(m.getOrchi(j, i) >= orchiBest) {
+                if(m.getOrchi(j, i) >= orchiBest)
                     score = m.getOrchi(j, i);
-                }
                 if(score >= scoreBest) {
                     scoreBest = score;
                     xBest = j;

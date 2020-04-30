@@ -13,8 +13,9 @@ public class Map {
     private int yCounter; // Contatore per addCell delle ordinate
 
     public Map(int width, int height) throws InputErrorException {
-        if(width <= 0 | height <= 0)
+        if(width <= 0 | height <= 0) {
             throw new InputErrorException();
+        }
         this.width = width;
         this.height = height;
         map = new Cell[width][height];
@@ -22,7 +23,7 @@ public class Map {
     }
 
     public void addCell(String type) throws InputErrorException {
-        if(!(type.equals("montagna") | type.equals("bosco") | type.equals("pianura")))
+        if(!(type.equals("montagna") || type.equals("bosco") || type.equals("pianura")))
             throw new InputErrorException();
         Cell cell = new Cell(type);
         if(xCounter > width - 1) {
@@ -49,20 +50,17 @@ public class Map {
     */
 
     public void addElfo(int x, int y) throws InputErrorException {
-        if(getCharacters(x, y) > 4)
-            throw new InputErrorException();
+        isValid(x, y);
         map[x][y].elfi++;
     }
 
     public void addNano(int x, int y) throws InputErrorException {
-        if(getCharacters(x, y) > 4)
-            throw new InputErrorException();
+        isValid(x, y);
         map[x][y].nani++;
     }
 
     public void addOrco(int x, int y) throws InputErrorException {
-        if(getCharacters(x, y) > 4)
-            throw new InputErrorException();
+        isValid(x, y);
         map[x][y].orchi++;
     }
 
@@ -83,6 +81,11 @@ public class Map {
         return map[x][y].orchi;
     }
 
+    private void isValid(int x, int y) throws InputErrorException {
+        if(x < 0 || y < 0 || x > width || y > height || getCharacters(x, y) > 4)
+            throw new InputErrorException();
+    }
+
     private int getCharacters(int x, int y) {
         return getElfi(x, y) + getNani(x, y) + getOrchi(x, y);
     }
@@ -99,21 +102,6 @@ public class Map {
     public double getOverallDefence(int x, int y, boolean isDay) {
         map[x][y].calculateOverallDefence(isDay);
         return map[x][y].overallDefence;
-    }
-
-    // DEBUG
-
-    /*
-        Metodo print di debug
-    */
-
-    public void print() {
-        for(int i = 0; i < height; i++) {
-            for( int j = 0; j < width; j++) {
-                System.out.print(map[j][i].type + " ");
-            }
-            System.out.println();
-        }
     }
 
     private class Cell {
