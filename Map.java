@@ -69,25 +69,25 @@ public class Map {
         Richiedono come parametro le coordinate della cella.
     */
 
-    public int getElfi(int x, int y) {
+    public int getElfiNumber(int x, int y) {
         return map[x][y].elfi;
     }
 
-    public int getNani(int x, int y) {
+    public int getNaniNumber(int x, int y) {
         return map[x][y].nani;
     }
 
-    public int getOrchi(int x, int y) {
+    public int getOrchiNumber(int x, int y) {
         return map[x][y].orchi;
     }
 
     private void isValid(int x, int y) throws InputErrorException {
-        if(x < 0 || y < 0 || x > width || y > height || getCharacters(x, y) > 4)
+        if(x < 0 || y < 0 || x > width || y > height || getCharactersNumber(x, y) > 4)
             throw new InputErrorException();
     }
 
-    private int getCharacters(int x, int y) {
-        return getElfi(x, y) + getNani(x, y) + getOrchi(x, y);
+    private int getCharactersNumber(int x, int y) {
+        return getElfiNumber(x, y) + getNaniNumber(x, y) + getOrchiNumber(x, y);
     }
 
     /*

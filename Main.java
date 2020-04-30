@@ -100,9 +100,9 @@ public class Main {
         int orchi = 0;
         for(int i = 0; i < m.getHeight(); i++) {
             for(int j = 0; j < m.getWidth(); j++) {
-                elfi += m.getElfi(j, i);
-                nani += m.getNani(j, i);
-                orchi += m.getOrchi(j, i);
+                elfi += m.getElfiNumber(j, i);
+                nani += m.getNaniNumber(j, i);
+                orchi += m.getOrchiNumber(j, i);
             }
         }
         System.out.println("Elfi: " + elfi);
@@ -171,19 +171,19 @@ public class Main {
         int score = 0;
         for(int i = 0; i < m.getHeight(); i++) {
             for(int j = 0; j < m.getWidth(); j++) {
-                if(m.getElfi(j, i) >= elfiBest)
-                    score = m.getElfi(j, i);
-                if(m.getNani(j, i) >= naniBest)
-                    score = m.getNani(j, i);
-                if(m.getOrchi(j, i) >= orchiBest)
-                    score = m.getOrchi(j, i);
+                if(m.getElfiNumber(j, i) >= elfiBest)
+                    score = m.getElfiNumber(j, i);
+                if(m.getNaniNumber(j, i) >= naniBest)
+                    score = m.getNaniNumber(j, i);
+                if(m.getOrchiNumber(j, i) >= orchiBest)
+                    score = m.getOrchiNumber(j, i);
                 if(score >= scoreBest) {
                     scoreBest = score;
                     xBest = j;
                     yBest = i;
-                    elfiBest = m.getElfi(xBest, yBest);
-                    naniBest = m.getNani(xBest, yBest);
-                    orchiBest = m.getOrchi(xBest, yBest);
+                    elfiBest = m.getElfiNumber(xBest, yBest);
+                    naniBest = m.getNaniNumber(xBest, yBest);
+                    orchiBest = m.getOrchiNumber(xBest, yBest);
                 }
                 score = 0;
             }
