@@ -1,8 +1,8 @@
 public class Character {
-    private double attack;
-    private double defence;
+    private int attack;
+    private int defence;
 
-    public Character(double attack, double defence) {
+    public Character(int attack, int defence) {
         this.attack = attack;
         this.defence = defence;
     }

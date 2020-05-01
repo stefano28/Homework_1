@@ -95,13 +95,11 @@ public class Map {
     */
 
     public double getOverallAttack(int x, int y, boolean isDay) {
-        map[x][y].calculateOverallAttack(isDay);
-        return map[x][y].overallAttack;
+        return map[x][y].calculateOverallAttack(isDay);
     }
 
     public double getOverallDefence(int x, int y, boolean isDay) {
-        map[x][y].calculateOverallDefence(isDay);
-        return map[x][y].overallDefence;
+        return map[x][y].calculateOverallDefence(isDay);
     }
 
     private class Cell {
@@ -109,8 +107,6 @@ public class Map {
         int elfi; // contatore numero di elfi
         int nani; // contatore numero di nani
         int orchi; // contatore numero di orchi
-        double overallAttack; // double che memorizza il punteggio totale di attacco
-        double overallDefence; // double che memorizza il punteggio totale di difesa
         
         public Cell(String type) {
             elfi = nani = orchi = 0;
@@ -123,8 +119,8 @@ public class Map {
             calcolare.
         */
 
-        public void calculateOverallAttack(boolean isDay) {
-            overallAttack = elfi * elfo.getAttack() + nani * nano.getAttack() + orchi * orco.getAttack();
+        public double calculateOverallAttack(boolean isDay) {
+            double overallAttack = elfi * elfo.getAttack() + nani * nano.getAttack() + orchi * orco.getAttack();
             if(nani > 0 && type.equals("montagna")) {
                 overallAttack += nani * nano.getAttack();
             }
@@ -134,10 +130,11 @@ public class Map {
             if(orchi > 0 && !isDay) {
                 overallAttack += orchi * orco.getAttack() / 2;
             }
+            return overallAttack;
         }
 
-        public void calculateOverallDefence(boolean isDay) {
-            overallDefence = elfi * elfo.getDefence() + nani * nano.getDefence() + orchi * orco.getDefence();   
+        public double calculateOverallDefence(boolean isDay) {
+            double overallDefence = elfi * elfo.getDefence() + nani * nano.getDefence() + orchi * orco.getDefence();   
             if(elfi > 0 && type.equals("bosco")) {
                 overallDefence += elfi * elfo.getDefence();
             }
@@ -147,6 +144,7 @@ public class Map {
             if(orchi > 0 && !isDay) {
                 overallDefence += orchi * orco.getDefence() / 2;
             }
+            return overallDefence;
         }
     }
 }
