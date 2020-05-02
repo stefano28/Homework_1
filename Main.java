@@ -123,7 +123,7 @@ public class Main {
         for(int i = 0; i < m.getHeight(); i++) {
             for(int j = 0; j < m.getWidth(); j++) {
                 double tmp = m.getOverallDefence(j, i, isDay);
-                if(tmp > best) {
+                if(tmp >= best) {
                     best = tmp;
                     xBest = j;
                     yBest = i;
@@ -146,7 +146,7 @@ public class Main {
         for(int i = 0; i < m.getHeight(); i++) {
             for(int j = 0; j < m.getWidth(); j++) {
                 double tmp = m.getOverallAttack(j, i, isDay);
-                if(tmp > best) {
+                if(tmp >= best) {
                     best = tmp;
                     xBest = j;
                     yBest = i;
@@ -164,28 +164,42 @@ public class Main {
     static void BestEqualPieces(Map m) {
         int xBest = 0;
         int yBest = 0;
+        int score = 0;
+        int scoreBest = 0;
+        int elfi = 0;
+        int nani = 0;
+        int orchi = 0;
         int elfiBest = 0;
         int naniBest = 0;
         int orchiBest = 0;
-        int scoreBest = 0;
-        int score = 0;
+
+
         for(int i = 0; i < m.getHeight(); i++) {
             for(int j = 0; j < m.getWidth(); j++) {
-                if(m.getElfiNumber(j, i) >= elfiBest)
-                    score = m.getElfiNumber(j, i);
-                if(m.getNaniNumber(j, i) >= naniBest)
-                    score = m.getNaniNumber(j, i);
-                if(m.getOrchiNumber(j, i) >= orchiBest)
-                    score = m.getOrchiNumber(j, i);
+                elfi = m.getElfiNumber(j, i);
+                nani = m.getNaniNumber(j, i);
+                orchi = m.getOrchiNumber(j, i);
+
+                if(elfi > nani) {
+                    if(elfi > orchi)
+                        score = elfi;
+                    else if(nani > orchi)
+                            score = nani;
+                        else
+                            score = orchi;
+                } else if(orchi > nani)
+                        score = orchi;
+                    else
+                        score = nani;
+                        
                 if(score >= scoreBest) {
                     scoreBest = score;
                     xBest = j;
                     yBest = i;
-                    elfiBest = m.getElfiNumber(xBest, yBest);
-                    naniBest = m.getNaniNumber(xBest, yBest);
-                    orchiBest = m.getOrchiNumber(xBest, yBest);
+                    elfiBest = elfi;
+                    naniBest = nani;
+                    orchiBest = orchi;
                 }
-                score = 0;
             }
         }
         System.out.println("(" + xBest + ", " + yBest + ") con " + elfiBest + " elfi, " + naniBest + " nani e " + orchiBest + " orchi");
