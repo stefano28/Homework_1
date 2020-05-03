@@ -121,29 +121,25 @@ public class Map {
 
         public double calculateOverallAttack(boolean isDay) {
             double overallAttack = elfi * elfo.getAttack() + nani * nano.getAttack() + orchi * orco.getAttack();
-            if(nani > 0 && type.equals("montagna")) {
+            // Definizione dei modificatori di attacco
+            if(nani > 0 && type.equals("montagna"))
                 overallAttack += nani * nano.getAttack();
-            }
-            if(orchi > 0 && isDay) {
+            if(orchi > 0 && isDay)
                 overallAttack -= orchi * orco.getAttack() / 2;
-            }
-            if(orchi > 0 && !isDay) {
+            if(orchi > 0 && !isDay)
                 overallAttack += orchi * orco.getAttack() / 2;
-            }
             return overallAttack;
         }
 
         public double calculateOverallDefence(boolean isDay) {
-            double overallDefence = elfi * elfo.getDefence() + nani * nano.getDefence() + orchi * orco.getDefence();   
-            if(elfi > 0 && type.equals("bosco")) {
+            double overallDefence = elfi * elfo.getDefence() + nani * nano.getDefence() + orchi * orco.getDefence();
+            // Definizione dei modificatori di difesa
+            if(elfi > 0 && type.equals("bosco"))
                 overallDefence += elfi * elfo.getDefence();
-            }
-            if(orchi > 0 && isDay) {
+            if(orchi > 0 && isDay)
                 overallDefence -= orchi * orco.getDefence() / 2;
-            }
-            if(orchi > 0 && !isDay) {
+            if(orchi > 0 && !isDay)
                 overallDefence += orchi * orco.getDefence() / 2;
-            }
             return overallDefence;
         }
     }

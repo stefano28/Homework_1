@@ -48,15 +48,14 @@ public class Main {
             if(lineCounter != map.getHeight() * map.getWidth()) {
                 throw new InputErrorException();
             }
-            // Lettura e inserimento dei dati contenuti nel primo secondo file: personaggi
+            // Lettura e inserimento dei dati contenuti nel secondo file: personaggi
             reader = new FileReader(args[1]);
             buffer = new BufferedReader(reader);
 
             while((line = buffer.readLine()) != null) {
                 String[] lineSplit = line.split(" ", 3);
                 int x = Integer.parseInt(lineSplit[0]);
-                int y = Integer.parseInt(lineSplit[1]);
-                
+                int y = Integer.parseInt(lineSplit[1]);    
                 switch(lineSplit[2]) {
                     case "elfo":
                         map.addElfo(x, y);
@@ -179,7 +178,6 @@ public class Main {
                 elfi = m.getElfiNumber(j, i);
                 nani = m.getNaniNumber(j, i);
                 orchi = m.getOrchiNumber(j, i);
-
                 if(elfi > nani) {
                     if(elfi > orchi)
                         score = elfi;
@@ -191,7 +189,6 @@ public class Main {
                         score = orchi;
                     else
                         score = nani;
-                        
                 if(score >= scoreBest) {
                     scoreBest = score;
                     xBest = j;
